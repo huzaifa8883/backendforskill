@@ -1,10 +1,7 @@
 import express from "express";
 import cors from 'cors';
 import cookieParser from "cookie-parser";
-import withdrawalRoutes from './routes/withdrawalRoutes';
-import referralRoutes from './routes/referral';
-import referralsRoutes from './routes/referrals';
-import adminRoutes from './routes/adminRoutes';
+
 import userrouter from './Routes/user.routes.js';
 import videorouter from './Routes/video.routes.js';
 
@@ -12,15 +9,29 @@ const app = express();
 
 // Middleware
 app.use(express.json());
-app.use(cors());
+const allowedOrigins = ["https://skillsodine.com", "https://www.skillsodine.com"];
+
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  methods: ["GET", "POST","PUT", "DELETE"],
+  allowedHeaders: ["Content-Type", "Authorization"]
+}));
+
+
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 // Routes
-app.use('/api/withdrawal', withdrawalRoutes);
-app.use('/api/referral', referralRoutes);
-app.use('/api/referrals', referralsRoutes);
-app.use('/api/admin', adminRoutes); // Admin routes for admin-related tasks
+// app.use('/api/withdrawal', withdrawalRoutes);
+// app.use('/api/referral', referralRoutes);
+// app.use('/api/referrals', referralsRoutes);
+// app.use('/api/admin', adminRoutes); // Admin routes for admin-related tasks
 app.use('/api/v1/user', userrouter);
 app.use('/api/v1/video', videorouter);
 
