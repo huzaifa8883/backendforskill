@@ -36,11 +36,11 @@ app.use('/api/v1/user', userrouter);
 app.use('/api/v1/video', videorouter);
 
 // Set up the port
-const port = process.env.PORT || 5002;
+const PORT = process.env.PORT || Math.floor(3000 + Math.random() * 5000); 
 
 // Start the server
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });
 
 export { app };
