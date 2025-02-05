@@ -1,1 +1,1 @@
-export const DB_NAME='Trader'
+export const DB_NAME='Traderweb'
