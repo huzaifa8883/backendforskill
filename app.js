@@ -32,7 +32,7 @@ app.use('/api/v1/user', userrouter);
 app.use('/api/v1/video', videorouter);
 
 // Set up the port
-const PORT = process.env.PORT || Math.floor(3000 + Math.random() * 5000);
+const PORT = 8090 || Math.floor(3000 + Math.random() * 5000);
 
 // Check if port is available
 const server = net.createServer();
